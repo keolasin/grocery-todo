@@ -1,26 +1,19 @@
 import React from 'react';
+import { useQuery } from 'react-apollo';
+
+// components
 import FoodItem from './FoodItem';
 
-import { useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
+// graphQL queries/mutations/subscriptions
+import FEED_QUERY from '../graphQL/Queries.js';
 
-function FoodList(props){
+const container = {
+    display: 'flex',
+    flexFlow: 'row wrap',
+    justifyContent: 'center'
+};
 
-    // define our query
-    const FEED_QUERY = gql`
-        {
-            feed {
-                id
-                name
-                quantity
-                inCart
-                postedBy {
-                    name
-                }
-            }
-        }
-    `;
-    
+function FoodList(props){    
     // call our query, extract loading, error, data states
     const { loading, error, data } = useQuery(FEED_QUERY, {
         pollInterval: 500
@@ -33,14 +26,17 @@ function FoodList(props){
 
     // show error if encountered
     if(error){
-        return (<h5>Error: {error}</h5>);
+        console.log(error);
+        return (
+            <h5>Error!</h5>
+        );
     }
 
     // show data once loaded
     return(
-        <section>
+        <article style={container}>
             {data.feed.map(food => <FoodItem key={food.id} food={food} />)}
-        </section>
+        </article>
     );
 }
 
