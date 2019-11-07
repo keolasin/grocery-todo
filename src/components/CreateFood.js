@@ -15,7 +15,6 @@ function CreateFood(props){
     let onSubmit = (event) => {
         event.preventDefault();
         addFood({ variables: { name: name, quantity: parseInt(quantity), inCart: inCart } }); // call addFood mutation
-        props.history.push('/');
     };
 
     if (loading){
