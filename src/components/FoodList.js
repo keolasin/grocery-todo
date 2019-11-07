@@ -5,7 +5,7 @@ import { useQuery } from 'react-apollo';
 import FoodItem from './FoodItem';
 
 // graphQL queries/mutations/subscriptions
-import FEED_QUERY from '../graphQL/Queries.js';
+import {FEED_QUERY} from '../graphQL/Queries.js';
 
 const container = {
     display: 'flex',
