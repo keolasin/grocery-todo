@@ -14,15 +14,9 @@ function Navbar(props) {
     
     return (
         <nav style={navStyle}>
-            <h1>Grab and Grocer</h1>
             <Link to='/'>
-                Home
+                <h1>Grab and Grocer</h1>
             </Link>
-            {authToken && (
-                <Link to='/create'>
-                    Create
-                </Link>
-            )}
             {authToken ? (
                 <button onClick={() => {
                     client.writeData({ data: { isLoggedIn: false } });
@@ -36,7 +30,6 @@ function Navbar(props) {
                     Login
                 </Link>
             )}
-            
         </nav>
     );
 }

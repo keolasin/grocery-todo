@@ -50,8 +50,49 @@ const ADD_FOOD = gql`
     }
 `;
 
+const UPDATE_FOOD = gql`
+    mutation updateFood($id: ID!, $name: String!, $quantity: Int!, $inCart: Boolean!){
+        updateFood(
+            id: $id
+            name: $name
+            quantity: $quantity
+            inCart: $inCart
+        ) {
+            id
+            name
+            quantity
+            inCart
+        }
+    }
+`;
+
+const DELETE_FOOD = gql`
+    mutation deleteFood($id: ID!){
+        deleteFood(
+            id: $id
+        ) {
+            name
+        }
+    }
+`;
+
+const CREATE_GROUP = gql`
+    mutation CreateGroup($name: String!, $isPrivate: Boolean!){
+        createGroup(
+            name: $name
+            isPrivate: $isPrivate
+        ) {
+            name
+            isPrivate
+        }
+    }
+`;
+
 export {
     SIGNUP_MUTATION,
     LOGIN_MUTATION,
-    ADD_FOOD
+    CREATE_GROUP,
+    ADD_FOOD,
+    UPDATE_FOOD,
+    DELETE_FOOD
 };

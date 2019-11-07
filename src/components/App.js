@@ -3,9 +3,8 @@ import { Switch, Route } from 'react-router-dom';
 import '../styles/App.css';
 
 // components
+import Dashboard from '../views/Dashboard';
 import Navbar from './Navbar';
-import FoodList from './FoodList';
-import CreateFood from './CreateFood';
 import Login from './Login';
 
 function App() {
@@ -13,9 +12,8 @@ function App() {
     <div className="App">
       <Navbar />
       <Switch>
-        <Route exact path='/' component={FoodList}/>
-        <Route exact path='/create' component={CreateFood}/>
-        <Route exact path='/Login' component={Login}/>
+        <Route exact path='/' component={Dashboard} />
+        <Route path='/login' component={Login} />
       </Switch>
     </div>
   );
