@@ -15,9 +15,12 @@ const container = {
 };
 
 function GroupList(props){    
+    // auth prop
+    const isAuth = localStorage.getItem('token');
+
     // call our query, extract loading, error, data states
     const { loading, error, data } = useQuery(GET_GROUPS, {
-        pollInterval: 500
+        pollInterval: 1000
     });
     
     // while loading from API
@@ -36,8 +39,12 @@ function GroupList(props){
     // show data once loaded
     return(
         <article style={container}>
+            {isAuth ? (
+                
+                <CreateGroup />
+                
+            ) : null}
             {data.groupList.map(group => <GroupItem key={group.id} group={group} />)}
-            <CreateGroup />
         </article>
     );
 }

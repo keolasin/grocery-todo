@@ -1,14 +1,20 @@
 import gql from 'graphql-tag';
 
 const FEED_QUERY = gql`
-    query showFeed {
-        feed {
+    query showFeed($filter: String) {
+        groupList(filter: $filter) {
             id
-            name
-            quantity
-            inCart
-            postedBy {
+            createdBy {
                 name
+            }
+            foods {
+                id
+                name
+                quantity
+                inCart
+                postedBy {
+                    name
+                }
             }
         }
     }
