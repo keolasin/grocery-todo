@@ -38,11 +38,12 @@ const LOGIN_MUTATION = gql`
 `;
 
 const ADD_FOOD = gql`
-    mutation AddFood($name: String!, $quantity: Int!, $inCart: Boolean!){
-        post(
+    mutation AddFood($name: String!, $quantity: Int!, $inCart: Boolean!, $groupId: ID!){
+        createFood(
             name: $name
             quantity: $quantity
             inCart: $inCart 
+            groupId: $groupId
         ) {
             id
             name

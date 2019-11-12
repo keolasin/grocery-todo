@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 let listItem = {
     margin: '10px',
@@ -6,13 +8,23 @@ let listItem = {
 };
 
 function GroupItem(props) {
-    if (props.group.isPrivate){
+    // extract group from props
+    const group = props.group;
+
+    // currently, don't show private groups
+    if (group.isPrivate){
         return null;
     }
+
     return (
         <section style={listItem}>
-            <h3>{props.group.name}</h3>
-            <p>Created by: {props.group.createdBy.name}</p>
+            <Link to={{
+                pathname: `/groups/${group.name}`,
+                state: { 
+                    fromGroup: group // passing the necessary group.id along to the rendered component for that path (FoodList)
+                }
+            }}>{group.name}</Link>
+            <p>Created by: {group.createdBy.name}</p>
         </section>
     );
 }
