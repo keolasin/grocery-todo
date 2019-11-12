@@ -18,22 +18,22 @@ function FoodItem(props) {
     const [name, setName] = useState(food.name);
     const [quantity, setQuantity] = useState(food.quantity);
 
-    // mutation hooks
+    // graphQL mutation hooks
     const [deleteFood] = useMutation(DELETE_FOOD);
     const [updateFood, {loading, error}] = useMutation(UPDATE_FOOD);
 
     // handler functions
     let updateCart = (event) => {
         event.preventDefault();
-        updateFood({ // updateFood
-            variables: { 
+        updateFood({ // updateFood hook
+            variables: {  // pass variables to the mutation
                 id: food.id,
                 name: name,
                 quantity: parseInt(quantity),
                 inCart: food.inCart
             }
         });
-        setEditing(!editing);
+        setEditing(!editing); // toggle editing status for conditional rendering
     }
 
     let toggleInCart = (event) => {
@@ -48,6 +48,7 @@ function FoodItem(props) {
         });
     }
 
+    // toggle editing on click
     let editCart = (event) => {
         event.preventDefault();
         setEditing(!editing);
@@ -58,6 +59,7 @@ function FoodItem(props) {
         deleteFood({ variables: { id: food.id }}); // delete target food
     }
 
+    // conditional rendering
     if(loading){
         return <p>Loading...</p>;
     }

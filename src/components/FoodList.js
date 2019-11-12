@@ -3,9 +3,11 @@ import { useQuery } from 'react-apollo';
 
 // components
 import FoodItem from './FoodItem';
+import CreateFood from './CreateFood';
 
 // graphQL queries/mutations/subscriptions
-import {FEED_QUERY} from '../graphQL/Queries.js';
+import { FEED_QUERY } from '../graphQL/Queries.js';
+
 
 const container = {
     display: 'flex',
@@ -13,12 +15,18 @@ const container = {
     justifyContent: 'center'
 };
 
-function FoodList(props){    
+function FoodList(props){
+    // receiving our necessary group data for query
+    const fromGroup = props.location.state.fromGroup;
+    
     // call our query, extract loading, error, data states
     const { loading, error, data } = useQuery(FEED_QUERY, {
-        pollInterval: 500
+        variables: { filter: fromGroup.name }, // filter, showing only foods for group selected
+        pollInterval: 5,
     });
+
     
+
     // while loading from API
     if(loading){
         return (<h5>Loading...</h5>);
@@ -26,7 +34,6 @@ function FoodList(props){
 
     // show error if encountered
     if(error){
-        console.log(error);
         return (
             <h5>Error!</h5>
         );
@@ -34,9 +41,10 @@ function FoodList(props){
 
     // show data once loaded
     return(
-        <article style={container}>
-            {data.feed.map(food => <FoodItem key={food.id} food={food} />)}
-        </article>
+        <main style={container}>
+            <CreateFood groupId={fromGroup.id}/>
+            {data.groupList[0].foods.length > 0 ? data.groupList[0].foods.map(food => <FoodItem key={food.id} food={food} />) : <h4>There's nothing here...</h4>}
+        </main>
     );
 }
 
