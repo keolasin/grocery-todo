@@ -19,7 +19,6 @@ function Login(props){
         login ? LOGIN_MUTATION : SIGNUP_MUTATION, // first argument is the mutation request to the backend API (login or signup)
         { // second argument is a function to be run on completion of the request using the response data
             onCompleted( data ) {
-                console.log(data);
                 const token = login ? data.login.token : data.signup.token; // use token from appropriate mutation response
                 localStorage.setItem('token', token); // set token in local storage *NOT BEST PRACTICE*
                 client.writeData({ data: { isLoggedIn: true } }); // direct write to client cache, set isLoggedIn after successful login

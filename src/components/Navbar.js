@@ -10,7 +10,7 @@ const navStyle={
 
 function Navbar(props) {
     const client = useApolloClient();
-    const authToken = localStorage.getItem('token');
+    const authToken = localStorage.getItem('token');;
     
     return (
         <nav style={navStyle}>
