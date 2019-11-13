@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import './styles/index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+
+// theme/styling
+import { ThemeProvider } from './styles/theme/ThemeContext';
+import './styles/index.css';
 
 // apollo/graphql modules
 import { ApolloProvider } from 'react-apollo';
@@ -48,7 +51,9 @@ cache.writeData({
 ReactDOM.render(
     <BrowserRouter>
         <ApolloProvider client={client}>
-            <App />
+            <ThemeProvider>
+                <App />
+            </ThemeProvider>
         </ApolloProvider>
     </BrowserRouter>,
     document.getElementById('root')
