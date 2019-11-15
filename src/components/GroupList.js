@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import { useQuery } from 'react-apollo';
 
 // components
@@ -8,13 +10,18 @@ import CreateGroup from './CreateGroup';
 // graphQL queries/mutations/subscriptions
 import {GET_GROUPS} from '../graphQL/Queries.js';
 
-const container = {
-    display: 'flex',
-    flexFlow: 'row wrap',
-    justifyContent: 'flex-start'
-};
+function GroupList(){    
+    // styling 
+    const theme = useTheme();
+    const style = css`
+        label: group-container;
+        grid-area: group;
+    `;
 
-function GroupList(props){    
+    const listStyle = css`
+    
+    `;
+
     // auth prop
     const isAuth = localStorage.getItem('token');
 
@@ -38,14 +45,17 @@ function GroupList(props){
 
     // show data once loaded
     return(
-        <article style={container}>
+        <aside css={style}>
             {isAuth ? (
-                
                 <CreateGroup />
-                
             ) : null}
-            {data.groupList.map(group => <GroupItem key={group.id} group={group} />)}
-        </article>
+
+            <h3>Check out a group below:</h3>
+
+            <ul css={listStyle}>
+                {data.groupList.map(group => <GroupItem key={group.id} group={group} />)}
+            </ul>
+        </aside>
     );
 }
 

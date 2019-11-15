@@ -1,13 +1,16 @@
-import React from 'react';
-
-// styling
-import { useTheme } from '../styles/theme/ThemeContext';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 
 function ThemeToggler(){
     const themeState = useTheme();
+    
+    const style = css`
+        grid-area: toggle;
+    `;
 
     return (
-        <button onClick={() => themeState.toggle()}>
+        <button css={style} onClick={() => themeState.toggle()}>
             {themeState.dark ? "Switch to light mode" : "Switch to dark mode"}
         </button>
     );

@@ -1,19 +1,26 @@
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { useApolloClient } from 'react-apollo';
 
-const navStyle={
-    display: 'flex',
-    alignItems: 'center',
-}
-
 function Navbar(props) {
+    // styling
+    const theme = useTheme();
+    const style = css({
+        label: 'nav',
+        gridArea: 'nav',
+        display: 'grid',
+        gridTemplateColumns: '2fr 1fr',
+    });
+    
+    // apollo login handling
     const client = useApolloClient();
-    const authToken = localStorage.getItem('token');;
+    const authToken = localStorage.getItem('token');
     
     return (
-        <nav style={navStyle}>
+        <nav css={style}>
             <Link to='/'>
                 <h1>Grab and Grocer</h1>
             </Link>

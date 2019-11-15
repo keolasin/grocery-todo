@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import '../styles/App.css';
+
 
 // components
 import GroupList from './GroupList';
@@ -14,9 +14,19 @@ import ThemeToggler from './ThemeToggler';
 import styled from '@emotion/styled';
 
 const Wrapper = styled('div')`
+  label: app-container;
   background: ${props => props.theme.background};
   width: 100vw;
   height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 3fr) 0.5fr;
+  grid-template-rows: 0.5fr 0.5fr 3fr 1fr;
+  grid-template-areas:
+    "nav nav nav toggle"
+    "nav nav nav ."
+    "group main main main"
+    ". footer footer .";
+  grid-gap: 5px 0px;
   font-family: "Roboto";
   h1 {
     color: ${props => props.theme.body};
@@ -28,9 +38,7 @@ function App() {
       <Wrapper>
         <Navbar />
         <ThemeToggler />
-        <aside>
-          <GroupList />
-        </aside>
+        <GroupList />
         <Switch>
           <Route exact path='/' component={Welcome} />
           <Route path='/login' component={Login} />

@@ -5,6 +5,13 @@ import { Link } from 'react-router-dom';
 // graphQL queries/mutations/subscriptions
 import { ADD_FOOD } from '../graphQL/Mutations';
 
+// styling
+import styled from '@emotion/styled';
+
+const Form = styled.form`
+    label: create-food-form;
+`;
+
 function CreateFood(props){
     // auth check
     const authToken = localStorage.getItem('token');
@@ -38,7 +45,7 @@ function CreateFood(props){
         return <p>Error: ${error.message}</p>
     }
     return (
-        <form onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
             <input 
                 type='text'
                 name='Name'
@@ -67,7 +74,7 @@ function CreateFood(props){
             >
             </input>
             <button type='submit'>Submit</button>
-        </form>
+        </Form>
     );
 };
 

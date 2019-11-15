@@ -1,11 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-
-
-let listItem = {
-    margin: '10px',
-    maxWidth: 'fit-content'
-};
 
 function GroupItem(props) {
     // extract group from props
@@ -17,15 +11,14 @@ function GroupItem(props) {
     }
 
     return (
-        <section style={listItem}>
+        <Fragment>
             <Link to={{
                 pathname: `/groups/${group.name}`,
                 state: { 
                     fromGroup: group // passing the necessary group.id along to the rendered component for that path (FoodList)
                 }
             }}>{group.name}</Link>
-            <p>Created by: {group.createdBy.name}</p>
-        </section>
+        </Fragment>
     );
 }
 
