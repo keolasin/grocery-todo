@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
+import { useState } from 'react';
 import { useMutation, useApolloClient } from 'react-apollo';
 
 // graphQL queries/mutations/subscriptions
 import { SIGNUP_MUTATION, LOGIN_MUTATION } from '../graphQL/Mutations';
 
 function Login(props){
+    // styling 
+    const theme = useTheme();
+    const style = css({
+        label: 'group-container',
+        gridArea: 'main'
+    });
+
     // access apollo client to cache login session
     const client = useApolloClient();
 
@@ -42,7 +52,7 @@ function Login(props){
     };
 
     return(
-        <article>
+        <main css={style}>
             <h4>{login ? 'Login' : 'Sign Up'}</h4>
             <form onSubmit={onSubmit}>
                 {!login && (
@@ -78,7 +88,7 @@ function Login(props){
                     </button>
                 </section>
             </form>
-        </article>
+        </main>
     );
 }
 

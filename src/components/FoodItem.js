@@ -1,15 +1,20 @@
-import React, { Fragment, useState } from 'react';
+import{ Fragment, useState } from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core';
+import { useTheme } from 'emotion-theming';
 import { useMutation } from 'react-apollo';
 
 // graphQL queries/mutations/subscriptions
 import { DELETE_FOOD, UPDATE_FOOD } from '../graphQL/Mutations.js';
 
-let listItem = {
-    margin: '10px',
-    maxWidth: 'fit-content'
-};
-
 function FoodItem(props) {
+    // styling
+    const theme = useTheme();
+    const style = {
+        display: 'grid',
+        
+    }
+    
     // specific food item
     let food = props.food;
 
@@ -68,7 +73,7 @@ function FoodItem(props) {
     }
 
     return (
-        <section style={listItem}>
+        <section css={style}>
             {editing ? (
             <form onSubmit={updateCart}>
                 <input 

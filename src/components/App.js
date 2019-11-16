@@ -1,5 +1,9 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 48139b4ce6d55afa36d837516d3e78b8e50a6f71
 
 // components
 import GroupList from './GroupList';
@@ -17,6 +21,15 @@ const Wrapper = styled('div')`
   background: ${props => props.theme.background};
   width: 100vw;
   height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr repeat(2, 3fr) 0.5fr;
+  grid-template-rows: 0.5fr 0.5fr 3fr 1fr;
+  grid-template-areas:
+    "nav nav nav toggle"
+    "nav nav nav ."
+    "group main main main"
+    ". footer footer .";
+  grid-gap: 5px 0px;
   font-family: "Roboto";
   display: grid;
   grid-template-columns: 1fr repeat(2, 3fr) 0.5fr;

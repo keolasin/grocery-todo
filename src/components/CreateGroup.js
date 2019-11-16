@@ -1,6 +1,14 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from 'react-apollo';
 import { CREATE_GROUP } from '../graphQL/Mutations';
+
+// styling
+import styled from '@emotion/styled';
+
+const Form = styled.form`
+    label: create-group-form;
+`;
+
 
 function CreateGroup(props){
     // state
@@ -26,27 +34,23 @@ function CreateGroup(props){
     }
 
     return (
-        <Fragment>
-            <form onSubmit={onSubmit}>
-                <label>Group name</label>
-                <input
-                    type='text'
-                    name='groupName'
-                    label='groupName'
-                    placeholder='Name of group'
-                    onChange={ event => setName(event.target.value)}
-                    required
-                />
-                <label>Private group?</label>
-                <input 
-                    type='checkbox'
-                    name='isPrivate'
-                    label='isPrivate'
-                    onChange={ event => setIsPrivate(!isPrivate)}
-                />
-                <button type='submit'>Add Group</button>
-            </form>
-        </Fragment>
+        <Form onSubmit={onSubmit}>
+            <h2>Create a group</h2>
+            <label for='name'>Name</label>
+            <input
+                id='name'
+                type='text'
+                placeholder='Name of group'
+                onChange={ event => setName(event.target.value)}
+                required
+            />
+            <label for='private'>Private group</label>
+            <input 
+                type='checkbox'
+                onChange={ event => setIsPrivate(!isPrivate)}
+            />
+            <button type='submit'>Add Group</button>
+        </Form>
     );
 }
 
