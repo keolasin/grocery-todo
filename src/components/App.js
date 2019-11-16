@@ -1,9 +1,5 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-<<<<<<< HEAD
-=======
-
->>>>>>> 48139b4ce6d55afa36d837516d3e78b8e50a6f71
 
 // components
 import GroupList from './GroupList';
