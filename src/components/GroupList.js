@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 import { useQuery } from 'react-apollo';
 
 // components
@@ -15,7 +15,7 @@ function GroupList(){
     const theme = useTheme();
     const style = css`
         label: group-container;
-        grid-area: group;
+        grid-area: aside;
     `;
 
     const listStyle = css`

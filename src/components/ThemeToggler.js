@@ -1,8 +1,9 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 
 function ThemeToggler(){
+    
     const themeState = useTheme();
     
     const style = css`

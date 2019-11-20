@@ -1,7 +1,7 @@
-import{ Fragment, useState } from 'react';
 /** @jsx jsx */
-import { jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { css, jsx } from '@emotion/core';
+import { useTheme } from '../styles/theme/ThemeContext';
+import { Fragment, useState } from 'react';
 import { useMutation } from 'react-apollo';
 
 // graphQL queries/mutations/subscriptions
@@ -10,10 +10,9 @@ import { DELETE_FOOD, UPDATE_FOOD } from '../graphQL/Mutations.js';
 function FoodItem(props) {
     // styling
     const theme = useTheme();
-    const style = {
-        display: 'grid',
-        
-    }
+    const style = css`
+        display: grid;
+    `;
     
     // specific food item
     let food = props.food;

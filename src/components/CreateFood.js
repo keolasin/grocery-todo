@@ -1,18 +1,20 @@
-import React, { useState, Fragment } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from '../styles/theme/ThemeContext';
+import { useState, Fragment } from 'react';
 import { useMutation } from 'react-apollo';
 import { Link } from 'react-router-dom';
 
 // graphQL queries/mutations/subscriptions
 import { ADD_FOOD } from '../graphQL/Mutations';
 
-// styling
-import styled from '@emotion/styled';
-
-const Form = styled.form`
-    label: create-food-form;
-`;
-
 function CreateFood(props){
+    // styling
+    const theme = useTheme();
+    const style = css`
+        font-size: 2em;
+    `;
+
     // auth check
     const authToken = localStorage.getItem('token');
 
@@ -45,7 +47,7 @@ function CreateFood(props){
         return <p>Error: ${error.message}</p>
     }
     return (
-        <Form onSubmit={onSubmit}>
+        <form css={style} onSubmit={onSubmit}>
             <input 
                 type='text'
                 name='Name'
@@ -74,7 +76,7 @@ function CreateFood(props){
             >
             </input>
             <button type='submit'>Submit</button>
-        </Form>
+        </form>
     );
 };
 

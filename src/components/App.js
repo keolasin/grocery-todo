@@ -18,24 +18,16 @@ const Wrapper = styled('div')`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 1fr repeat(2, 3fr) 0.5fr;
-  grid-template-rows: 0.5fr 0.5fr 3fr 1fr;
+  grid-template-columns: 0.5fr 1fr repeat(2, 3fr) repeat(2, 0.5fr);
+  grid-template-rows: 0.5fr repeat(2, 0.5fr) 3fr 1fr 0.5fr;
   grid-template-areas:
-    "nav nav nav toggle"
-    "nav nav nav ."
-    "group main main main"
-    ". footer footer .";
-  grid-gap: 5px 0px;
+    ". . . . . ."
+    ". nav nav nav toggle ."
+    ". nav nav nav . ."
+    ". aside main main main ."
+    ". . footer footer . .";
+    ". . . . . ."
   font-family: "Roboto";
-  display: grid;
-  grid-template-columns: 1fr repeat(2, 3fr) 0.5fr;
-  grid-template-rows: 0.5fr 0.5fr 3fr 1fr;
-  grid-template-areas:
-    "nav nav nav toggle"
-    "nav nav nav ."
-    "aside main main main"
-    ". footer footer .";
-  grid-gap: 5px 0px;
   h1 {
     color: ${props => props.theme.body};
   } 

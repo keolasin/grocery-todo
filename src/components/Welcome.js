@@ -1,14 +1,15 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 
 function Welcome(props){
     // styling
     const theme = useTheme();
-    const style = css({
-        label: 'landing-splash',
-        gridArea: 'main'
-    })
+    const style = css`
+        label: landing;
+        grid-area: main;
+    `;
+
     return (
         <main css={style}>
             <h2>Welcome!</h2>

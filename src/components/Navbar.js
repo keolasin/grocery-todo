@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { useApolloClient } from 'react-apollo';
@@ -8,12 +8,12 @@ import { useApolloClient } from 'react-apollo';
 function Navbar(props) {
     // styling
     const theme = useTheme();
-    const style = css({
-        label: 'nav',
-        gridArea: 'nav',
-        display: 'grid',
-        gridTemplateColumns: '2fr 1fr',
-    });
+    const style = css`
+        label: nav;
+        grid-area: nav;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    `;
     
     // apollo login handling
     const client = useApolloClient();

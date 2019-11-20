@@ -1,16 +1,18 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core';
+import { useTheme } from '../styles/theme/ThemeContext';
+import { useState } from 'react';
 import { useMutation } from 'react-apollo';
 import { CREATE_GROUP } from '../graphQL/Mutations';
 
-// styling
-import styled from '@emotion/styled';
-
-const Form = styled.form`
-    label: create-group-form;
-`;
-
 
 function CreateGroup(props){
+    // styling
+    const theme = useTheme();
+    const style = css`
+        label: create-group-form;
+    `;
+
     // state
     const [name, setName] = useState('');
     const [isPrivate, setIsPrivate] = useState(false);
@@ -34,23 +36,28 @@ function CreateGroup(props){
     }
 
     return (
-        <Form onSubmit={onSubmit}>
+        <form css={style} onSubmit={onSubmit}>
             <h2>Create a group</h2>
-            <label for='name'>Name</label>
-            <input
-                id='name'
-                type='text'
-                placeholder='Name of group'
-                onChange={ event => setName(event.target.value)}
-                required
-            />
-            <label for='private'>Private group</label>
-            <input 
-                type='checkbox'
-                onChange={ event => setIsPrivate(!isPrivate)}
-            />
+            <label>Name:
+                <input
+                    id='groupName'
+                    type='text'
+                    placeholder='Name of group'
+                    onChange={ event => setName(event.target.value)}
+                    required
+                />
+            </label>
+
+            <label>Private group:
+                <input 
+                    id='privateGroup'
+                    type='checkbox'
+                    onChange={ event => setIsPrivate(!isPrivate)}
+                />
+            </label>
+            
             <button type='submit'>Add Group</button>
-        </Form>
+        </form>
     );
 }
 

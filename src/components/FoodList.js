@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 import { useQuery } from 'react-apollo';
 
 // components
@@ -13,12 +13,12 @@ import { FEED_QUERY } from '../graphQL/Queries.js';
 function FoodList(props){
     // styling
     const theme = useTheme();
-    const style = css({
-        backgroundColor: theme.background,
-        color: theme.body,
-        gridArea: 'main',
-        overflow: 'auto'
-    });
+    const style = css`
+        background-color: ${theme.background};
+        color: ${theme.body};
+        grid-area: main;
+        overflow: auto;
+    `;
 
     // receiving our necessary group data for query
     const fromGroup = props.location.state.fromGroup;

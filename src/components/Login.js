@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
-import { useTheme } from 'emotion-theming';
+import { useTheme } from '../styles/theme/ThemeContext';
 import { useState } from 'react';
 import { useMutation, useApolloClient } from 'react-apollo';
 
@@ -10,10 +10,10 @@ import { SIGNUP_MUTATION, LOGIN_MUTATION } from '../graphQL/Mutations';
 function Login(props){
     // styling 
     const theme = useTheme();
-    const style = css({
-        label: 'group-container',
-        gridArea: 'main'
-    });
+    const style = css`
+        label: group-container;
+        grid-area: main;
+    `;
 
     // access apollo client to cache login session
     const client = useApolloClient();
