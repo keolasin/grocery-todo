@@ -11,8 +11,43 @@ import { ADD_FOOD } from '../graphQL/Mutations';
 function CreateFood(props){
     // styling
     const theme = useTheme();
+    console.log(theme);
     const style = css`
-        font-size: 2em;
+        font-size: ${theme.fontSizes};
+        grid-area: form;
+        place-self: center;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 3fr repeat(2, 2fr) 1fr;
+        grid-template-rows: 1fr;
+        grid-template-areas:
+            "name quantity cart submit";
+        h3, label {
+            display: inline-block;
+            text-align: center;
+        }
+        input {
+            padding: 5px 10px;
+            margin: 0px 10px;
+            background-color: ${theme.background};
+            color: ${theme.body};
+        }
+        #name {
+            grid-area: name;
+        }
+        #quantity {
+            grid-area: quantity;
+            input {
+                max-width: 50px;
+            }
+        }
+        #cart {
+            grid-area: cart;
+        }
+        #submit {
+            grid-area: submit;
+        }
+        
     `;
 
     // auth check
@@ -20,7 +55,7 @@ function CreateFood(props){
 
     // state
     const [name, setName] = useState('');
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const [inCart, setInCart] = useState(false);
 
     // graphQL mutation
@@ -30,6 +65,10 @@ function CreateFood(props){
     let onSubmit = (event) => {
         event.preventDefault();
         addFood({ variables: { name: name, quantity: parseInt(quantity), inCart: inCart, groupId: props.groupId } }); // call addFood mutation
+        // reset after submission
+        setName('');
+        setQuantity(1);
+        setInCart(false);
     };
 
     // conditional rendering
@@ -48,34 +87,37 @@ function CreateFood(props){
     }
     return (
         <form css={style} onSubmit={onSubmit}>
-            <input 
-                type='text'
-                name='Name'
-                onChange={ event => setName(event.target.value) }
-                placeholder='Add an item'
-                required
-                autoFocus
-            >
-            </input>
+            <label id='name'><h3>Product</h3>
+                <input 
+                    type='text'
+                    name='Name'
+                    onChange={ event => setName(event.target.value) }
+                    placeholder='Avocado'
+                    required
+                    autoFocus
+                />
+            </label>
 
-            <input 
-                type='text'
-                name='Quantity'
-                min='0'
-                onChange={ event => setQuantity(event.target.value) }
-                placeholder='How many?'
-                required
-            >
-            </input>
+            <label id='quantity'><h3>Quantity</h3>
+                <input 
+                    type='number'
+                    name='Quantity'
+                    min='1'
+                    onChange={ event => setQuantity(event.target.value) }
+                    placeholder='1'
+                    required
+                />
+            </label>
 
-            <label>Add to cart?</label>
-            <input 
-                type='checkbox'
-                name='inCart'
-                onChange={ event => setInCart(!inCart) }
-            >
-            </input>
-            <button type='submit'>Submit</button>
+            <label id='cart'>
+                <h3>In cart?</h3>
+                <input 
+                    type='checkbox'
+                    name='inCart'
+                    onChange={ event => setInCart(!inCart) }
+                />
+            </label>
+            <button id='submit' type='submit'>Add item{quantity > 1 ? 's' : ''}</button>
         </form>
     );
 };

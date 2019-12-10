@@ -14,10 +14,58 @@ function FoodList(props){
     // styling
     const theme = useTheme();
     const style = css`
-        background-color: ${theme.background};
+        background-color: ${theme.focus};
+        border: 1px solid ${theme.accent};
+        border-radius: 5px;
+        box-shadow: 5px 10px 20px ${theme.accent};
         color: ${theme.body};
         grid-area: main;
+        display: grid;
+        grid-template-rows: 0.25fr 0.5fr;
+        grid-auto-rows: 1fr;
         overflow: auto;
+        text-align: center;
+        grid-template-areas:
+            "title"
+            "form";
+        h2 {
+            font-style: italic;
+            grid-area: title;
+            border-bottom: 1px solid ${theme.accent};
+            place-self: center-stretch;
+        }
+        button {
+            background-color: ${theme.body};
+            color: ${theme.background};
+            border: 1px solid ${theme.accent};
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 3%;
+            margin: 2px;
+            box-shadow: 2px solid ${theme.active};
+            font-size: ${theme.fontSizes.tertiaryHeading};
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: ${theme.hover};
+        }
+        button:active {
+            background-color: ${theme.active};
+        }
+        ::-webkit-scrollbar {
+            width: 10px;
+            margin: 1px;
+        }
+        ::-webkit-scrollbar-track {
+            background: ${theme.background};
+        }
+        ::-webkit-scrollbar-thumb {
+            background: ${theme.body};
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: ${theme.hover};
+        }
     `;
 
     // receiving our necessary group data for query
@@ -47,6 +95,7 @@ function FoodList(props){
     // show data once loaded
     return(
         <main css={style}>
+            <h2>Shopping List</h2>
             <CreateFood groupId={fromGroup.id}/>
             {
                 isFoodsEmpty ? 

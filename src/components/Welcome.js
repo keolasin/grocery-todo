@@ -8,6 +8,23 @@ function Welcome(props){
     const style = css`
         label: landing;
         grid-area: main;
+        min-width: 1fr;
+        overflow: auto;
+        margin-left: 5px;
+        ::-webkit-scrollbar {
+            width: 10px;
+            margin: 1px;
+        }
+        ::-webkit-scrollbar-track {
+            background: ${theme.background};
+        }
+        ::-webkit-scrollbar-thumb {
+            background: ${theme.body};
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: ${theme.hover};
+        }
     `;
 
     return (

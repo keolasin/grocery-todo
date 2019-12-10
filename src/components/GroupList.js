@@ -16,10 +16,59 @@ function GroupList(){
     const style = css`
         label: group-container;
         grid-area: aside;
-    `;
-
-    const listStyle = css`
-    
+        text-align: center;
+        background-color: ${theme.focus};
+        border: 1px solid ${theme.accent};
+        border-radius: 5px;
+        box-shadow: 5px 10px 20px ${theme.accent};
+        ul {
+            list-style: none;
+            margin-block-start: 0;
+            margin-block-end: 0;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+            padding-inline-start: 0px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            max-height: 300px;
+            width: 100%;
+            
+            ::-webkit-scrollbar {
+                width: 10px;
+                margin: 1px;
+            }
+            ::-webkit-scrollbar-track {
+                background: ${theme.background};
+            }
+            ::-webkit-scrollbar-thumb {
+                background: ${theme.body};
+                border-radius: 5px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: ${theme.hover};
+            }
+        }
+        h3 {
+            display: inline-block;
+            margin: 2px;
+        }
+        button {
+            background-color: ${theme.body};
+            color: ${theme.background};
+            border: 1px solid ${theme.accent};
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 3%;
+            margin: 2px;
+            box-shadow: 2px solid ${theme.active};
+            font-size: ${theme.fontSizes.tertiaryHeading};
+            font-weight: bold;
+        }
+        li {
+            text-decoration: underline;
+            text-align: left;
+            margin: 10px;
+        }
     `;
 
     // auth prop
@@ -45,17 +94,17 @@ function GroupList(){
 
     // show data once loaded
     return(
-        <aside css={style}>
+        <article css={style}>
             {isAuth ? (
                 <CreateGroup />
             ) : null}
 
-            <h3>Check out a group below:</h3>
+            <h3>Check out a group</h3>
 
-            <ul css={listStyle}>
+            <ul>
                 {data.groupList.map(group => <GroupItem key={group.id} group={group} />)}
             </ul>
-        </aside>
+        </article>
     );
 }
 

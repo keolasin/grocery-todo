@@ -21,8 +21,8 @@ const FEED_QUERY = gql`
 `;
 
 const GET_GROUPS = gql`
-    query showFirstFive {
-        groupList(first: 5){
+    query allGroups {
+        groupList(orderBy: createdAt_DESC){
             id
             name
             isPrivate

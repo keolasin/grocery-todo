@@ -40,13 +40,14 @@ const ThemeProvider = ( {children} ) => {
     };
 
     const computedTheme = themeState.dark ? theme('dark') : theme('light');
-    
+
     return (
         <EmotionThemeProvider theme={computedTheme}>
             <ThemeContext.Provider 
                 value={{
                     dark: themeState.dark,
-                    toggle: toggle
+                    toggle: toggle,
+                    ...computedTheme
                 }}
             >
                 {children}

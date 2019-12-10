@@ -13,6 +13,18 @@ function Navbar(props) {
         grid-area: nav;
         display: grid;
         grid-template-columns: 2fr 1fr;
+        justify-items: left;
+        align-items: center;
+        text-align: center;
+        a {
+            border: 1px solid ${theme.accent};
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .login {
+            justify-self: right;
+        }
     `;
     
     // apollo login handling
@@ -22,19 +34,19 @@ function Navbar(props) {
     return (
         <nav css={style}>
             <Link to='/'>
-                <h1>Grab and Grocer</h1>
+                <h1>Grab&Grocer</h1>
             </Link>
             {authToken ? (
-                <button onClick={() => {
+                <a className='login' onClick={() => {
                     client.writeData({ data: { isLoggedIn: false } });
                     localStorage.clear();
                     props.history.push('/');
                 }}>
-                    Logout
-                </button>
+                    <h2>Logout</h2>
+                </a>
             ) : (
-                <Link to='/login'>
-                    Login
+                <Link className='login' to='/login'>
+                    <h2>Login</h2>
                 </Link>
             )}
         </nav>

@@ -12,6 +12,42 @@ function FoodItem(props) {
     const theme = useTheme();
     const style = css`
         display: grid;
+        grid-template-columns: 3fr repeat(2, 2fr) 1fr;
+        grid-template-areas:
+            "name quantity cart submit";
+        align-items: start;
+        h4 {
+            grid-area: name;
+            cursor: pointer;
+        }
+        h4,p:hover{
+            text-decoration: underline ${theme.hover};
+        }
+        h4,p:active{
+            text-decoration: underline ${theme.active};
+        }
+        .strikethrough {
+            text-decoration: line-through;
+        }
+        p {
+            cursor: pointer;
+            grid-area: quantity;
+            margin-block-start: 0px;
+            margin-block-end: 0px;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+        input[type="number"] {
+            max-width: 50px;
+        }
+
+        #inCart {
+            grid-area: cart;
+        }
+        #delete, button[type='submit'] {
+            grid-area: submit;
+        }
+        
     `;
     
     // specific food item
@@ -19,6 +55,8 @@ function FoodItem(props) {
 
     // state
     const [editing, setEditing] = useState(false);
+    const [editingFood, setEditingFood] = useState(false);
+    const [editingQuantity, setEditingQuantity] = useState(false);
     const [name, setName] = useState(food.name);
     const [quantity, setQuantity] = useState(food.quantity);
 
@@ -72,9 +110,8 @@ function FoodItem(props) {
     }
 
     return (
-        <section css={style}>
-            {editing ? (
-            <form onSubmit={updateCart}>
+        <form css={style} onSubmit={updateCart}>    
+            <h4 className={food.inCart ? 'strikethrough': null} onClick={editCart}>{editing ? (
                 <input 
                     type='text'
                     name='Name'
@@ -83,27 +120,22 @@ function FoodItem(props) {
                     required
                     autoFocus
                 />
+                ) : food.name}
+            </h4>
+            <p onClick={editCart}>{editing ? (
                 <input 
-                    type='text'
+                    type='number'
                     name='Quantity'
-                    min='0'
+                    min='1'
                     onChange={ event => setQuantity(event.target.value) }
                     placeholder={food.quantity}
                     required
                 />
-                <button type='submit'>Confirm changes</button>
-            </form>
-            ) : (
-                <Fragment>
-                    <h3>{food.name}</h3>
-                    <p>{food.quantity}</p>
-                </Fragment>
-            )}
-            
-            <button onClick={editCart}>{editing ? `Cancel` : `Edit`}</button>
-            <button onClick={toggleInCart}>{food.inCart ? `Remove from cart` : `Add to cart`}</button>
-            <button onClick={deleteConfirm}>Delete</button>
-        </section>
+                ) : food.quantity}
+            </p>
+            <button id='inCart' onClick={toggleInCart}>{food.inCart ? `Remove` : `Add`}</button>
+            {editing ? <button type='submit'>Confirm changes</button> : <button id='delete' onClick={deleteConfirm}>Delete</button>}
+        </form>
     );
 }
 

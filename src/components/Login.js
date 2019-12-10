@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core';
 import { useTheme } from '../styles/theme/ThemeContext';
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import { useMutation, useApolloClient } from 'react-apollo';
 
 // graphQL queries/mutations/subscriptions
@@ -13,6 +13,19 @@ function Login(props){
     const style = css`
         label: group-container;
         grid-area: main;
+        text-align: center;
+        justify-text: center;
+        button {
+            background-color: ${theme.body};
+            color: ${theme.background};
+            border: 1px solid ${theme.accent};
+            cursor: pointer;
+            padding: 3%;
+            margin: 2px;
+            box-shadow: 2px solid ${theme.active}
+            font-size: ${theme.fontSizes.mainHeading}
+        }
+        
     `;
 
     // access apollo client to cache login session
@@ -56,29 +69,39 @@ function Login(props){
             <h4>{login ? 'Login' : 'Sign Up'}</h4>
             <form onSubmit={onSubmit}>
                 {!login && (
+                    <Fragment>
+                        <label for='username'>Username</label>
+                            <input
+                                id='username'
+                                value={name}
+                                type='text'
+                                placeholder='Create a username'
+                                onChange={event => setName(event.target.value)}
+                                autoFocus
+                                required
+                            />
+                    </Fragment>
+                )}
+                <label for='email'>Email</label>
                     <input 
-                        value={name}
+                        id='email'
+                        value={email}
                         type='text'
-                        placeholder='Create a username'
-                        onChange={event => setName(event.target.value)}
-                        autoFocus
+                        placeholder='Add an email'
+                        onChange={event => setEmail(event.target.value)}
                         required
                     />
-                )}
-                <input 
-                    value={email}
-                    type='text'
-                    placeholder='Add an email'
-                    onChange={event => setEmail(event.target.value)}
-                    required
-                />
-                <input 
-                    value={password}
-                    type='password'
-                    placeholder='Create a password'
-                    onChange={event => setPassword(event.target.value)}
-                    required
-                />
+                <label for='password'>Password</label>
+                    <input 
+                        id='password'
+                        value={password}
+                        type='password'
+                        placeholder='Create a password'
+                        onChange={event => setPassword(event.target.value)}
+                        required
+                    />
+
+                {/* submit button, or select register/login */}
                 <section>
                     <button type='submit'>
                         {login ? 'Login' : 'Sign up'}

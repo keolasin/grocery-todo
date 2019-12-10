@@ -11,6 +11,16 @@ function CreateGroup(props){
     const theme = useTheme();
     const style = css`
         label: create-group-form;
+        border-bottom: 2px solid ${theme.accent}
+        padding: 1px;
+        text-align: left;
+        h2 {
+            text-align: center;
+        }
+        button {
+            display: block;
+            text-align: center;
+        }
     `;
 
     // state
@@ -38,7 +48,7 @@ function CreateGroup(props){
     return (
         <form css={style} onSubmit={onSubmit}>
             <h2>Create a group</h2>
-            <label>Name:
+            <label><h3>Name</h3>
                 <input
                     id='groupName'
                     type='text'
@@ -48,7 +58,7 @@ function CreateGroup(props){
                 />
             </label>
 
-            <label>Private group:
+            <label><h3>Private group?</h3>
                 <input 
                     id='privateGroup'
                     type='checkbox'
